@@ -1,77 +1,73 @@
-import React from 'react'
+import React from "react";
 
-const Header = (props)=> {
-  console.log(props)
-  return(
+const Header = (props) => {
+  console.log(props);
+  return (
     <div>
       <h1>{props.course}</h1>
     </div>
-  )
-}
+  );
+};
 
 const Part = (props) => {
-  console.log(props)
-  return(
+  console.log(props);
+  return (
     <div>
       {props.part} {props.exercise}
     </div>
-  )
-}
+  );
+};
 
-const Content = (props)=>{
-  console.log(props)
+const Content = (props) => {
+  console.log(props);
   return (
     <div>
       {
-        props.parts.map((part, index) =>(
+        props.parts.map((part, index) => (
           <Part key={index} part={part.name} exercise={part.exercises} />
         ))
         // Each child in a list should have a unique "key" prop.
       }
     </div>
-  )
-}
+  );
+};
 
 const Total = (props) => {
-  return(
-    <div>
-      Number of exercises {props.total} 
-    </div>
-  )
-}
+  return <div>Number of exercises {props.total}</div>;
+};
 
 const App = () => {
-  const course = 'Half Stack application development'
+  const course = {
+    name: "Half Stack application development",
 
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises : 10
-    },
-   {
-    name: 'Using props to pass data',
-    exercises : 7
-  },
-  {
-   name:'State of a component',
-   exercises : 14
-  }
-  ]
+    parts: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10,
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7,
+      },
+      {
+        name: "State of a component",
+        exercises: 14,
+      },
+    ],
+  };
 
-  const totalExercises = parts.reduce((sum, part) => {
+  const totalExercises = course.parts.reduce((sum, part) => {
     return sum + part.exercises;
   }, 0);
 
   return (
     <div>
-      <Header course={course} />
-      <Content parts={parts} /> 
+      <Header course={course.name} />
+      <Content parts={course.parts} />
       {/* <Total total={parts[0].exercises + parts[1].exercises + parts[2].exercises} /> */}
       <Total total={totalExercises} />
-
     </div>
-  )
-}
+  );
+};
 
-
-export default App
+export default App;
